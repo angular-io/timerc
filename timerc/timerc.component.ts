@@ -1,20 +1,25 @@
 import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
-  // tslint:disable-next-line:component-selector
   selector: 'timerc',
   templateUrl: './timerc.component.html',
-  styleUrls: ['./timerc.component.css']
+  styleUrls: ['./timerc.component.scss']
 })
 export class TimercComponent implements OnInit {
   @Input() dt;
+  @Input() dtid;
   displayTime: any;
+  days: any;
+  hours: any;
+  minutes: any;
+  seconds: any;
   constructor() { }
 
   ngOnInit() {
-    this.getTimer(this.dt);
+    console.log('timer componet');
+    this.getTimer(this.dt, this.dtid);
   }
-  public getTimer(time: string) {
+  public getTimer(time: string, timerId: string) {
  const countDownDate = new Date(time).getTime();
 
     // Update the count down every 1 second
@@ -30,16 +35,17 @@ export class TimercComponent implements OnInit {
       const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
       const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
       const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-      console.log(now, 'now', 'countDownDate', countDownDate, 'distance', distance, 'days', days);
-
+      console.log(days, 'days', 'hours', hours, 'minutes', minutes, 'seconds', seconds);
+      const ionicons = '<ion-icon src="/assets/icon/timppp.svg" style="zoom:1.4;  margin-top: 0px"></ion-icon>';
       // Output the result in an element with id="demo"
-      document.getElementById('timer').innerHTML = days + ':' + hours + ':' + minutes + ':' + seconds + '';
-
+      console.log(timerId);
+       document.getElementById('timer' + timerId + '').innerHTML = days + ':' + hours + ':' + minutes + ':' + seconds + '&nbsp;' + ionicons;
       // If the count down is over, write some text
       if (distance < 0) {
         clearInterval(x);
-        document.getElementById('timer').innerHTML = 'EXPIRED';
-      }
+         document.getElementById('timer' + timerId + '').innerHTML = '';
+        }
     }, 1000);
   }
 }
+
