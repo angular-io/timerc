@@ -1,3 +1,3 @@
 # timerc
 
-<timerc [dt]="product.timeend"></timerc>
+<timerc [dt]="product.timeend" [dtid]="product.id"></timerc>
